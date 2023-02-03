@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Pellet
   - PowerUp
+  - Portal 1
+  - Portal 2
   layers:
   - Default
   - TransparentFX

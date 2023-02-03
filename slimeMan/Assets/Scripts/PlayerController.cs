@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,9 +11,14 @@ public class PlayerController : MonoBehaviour
     float horizontal;
     float vertical;
 
+    public TextMeshProUGUI scoreText;
+    public int score;
+
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
+        score = 0;
+        SetScoreText();
     }
 
     void Update()
@@ -27,6 +35,30 @@ public class PlayerController : MonoBehaviour
         position.y = position.y + 3.0f * vertical * Time.deltaTime;
 
         rigidbody2d.MovePosition(position);
+
+    }
+    public void SetScoreText()
+    {
+        scoreText.text = "Score: " + score.ToString();
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+        if (sceneName == "SimeMan")
+        {
+            if (score == 6900)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+        }
+        else if (sceneName == "SimeMan Level 2")
+        {
+            if (score == 6700)
+            {
+                print("you win");
+                //display win text
+            }
+        }
+
+
 
     }
 
