@@ -8,6 +8,7 @@ TagManager:
   - PowerUp
   - Portal 1
   - Portal 2
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -11,9 +11,12 @@ public class PlayerController : MonoBehaviour
     float horizontal;
     float vertical;
 
-    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI scoreText; 
     public int score;
-
+    public TextMeshProUGUI livesText;
+    private int lives;
+    public TextMeshProUGUI WinText;
+    private int win;
     // Audio Clip
     [SerializeField] AudioSource audioSource;
 
@@ -22,6 +25,9 @@ public class PlayerController : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
         score = 0;
         SetScoreText();
+        lives = 3;
+        SetlivesText();
+        WinText.gameObject.SetActive(false);
     }
 
     void Update()
@@ -29,6 +35,10 @@ public class PlayerController : MonoBehaviour
        // Player Movement
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
+        if(Input.GetKeyDown(KeyCode.Escape) == true)
+        {
+            Application.Quit();
+        }
     }
 
     void FixedUpdate()
@@ -49,30 +59,71 @@ public class PlayerController : MonoBehaviour
         {
             if (score == 6900)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
             }
         }
         else if (sceneName == "SimeMan Level 2")
         {
             if (score == 6700)
             {
-                print("you win");
-                //display win text
+                if(gameObject.CompareTag("Player"))
+                {
+                    Destroy(gameObject);
+                    SetWinText();
+                }
             }
         }
 
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-   {
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         if (collision.collider.tag == "Pellet")
         {
-            audioSource.Play();
-            
+            audioSource.Play();  
         }
-   }
+        if (collision.collider.tag == "Enemy")
+        {
+            lives = lives -1;
+            //Destroy(collision.collider.gameObject);
+            SetlivesText();
+        }
 
+    }
+    void SetlivesText()
+    {
+        livesText.text = "Lives: " + lives.ToString();
+
+        if(lives <= 0) 
+        {
+            if(gameObject.CompareTag("Player"))
+            {
+                Destroy(gameObject);
+                SetWinText();
+            }
+        }
+    }
     
-
+        void SetWinText()
+    {
+        if(score == 6700)
+        {
+            WinText.gameObject.SetActive(true);
+            WinText.text = "You Win: Press SPACE";
+            if(Input.GetKeyDown(KeyCode.Space) == true)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+            }
+        }
+        else if( lives <= 0)
+        {
+            WinText.gameObject.SetActive(true);
+            WinText.text = "YOU DIED: Press SPACE";
+            if(Input.GetKeyDown(KeyCode.Space) == true)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+            }
+        }
+    }
 
 }
