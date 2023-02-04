@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public int score;
 
+    // Audio Clip
+    [SerializeField] AudioSource audioSource;
+
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -58,9 +61,16 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
-
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+   {
+        if (collision.collider.tag == "Pellet")
+        {
+            audioSource.Play();
+            
+        }
+   }
 
     
 

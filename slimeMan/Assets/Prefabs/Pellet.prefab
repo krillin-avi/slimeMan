@@ -114,3 +114,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d1aae9bd31fae44ae7c6040c0060a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectCoinSound: {fileID: 0}
