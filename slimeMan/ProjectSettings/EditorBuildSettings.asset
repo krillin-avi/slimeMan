@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SimeMan Level 2.unity
     guid: 4fbee0b661d4b164d8937d95975f16be
+  - enabled: 1
+    path: Assets/Scenes/WinScene.unity
+    guid: 52805fbe461171b46934759ee0d904d0
+  - enabled: 1
+    path: Assets/Scenes/LoseScene.unity
+    guid: 7d8b66c3f10773b419c878365f50a6ed
   m_configObjects: {}

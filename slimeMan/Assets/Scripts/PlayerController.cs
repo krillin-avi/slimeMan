@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     public int score;
     public TextMeshProUGUI livesText;
     private int lives;
-    public TextMeshProUGUI WinText;
     private int win;
     // Audio Clip
     [SerializeField] AudioSource audioSource;
@@ -27,7 +26,6 @@ public class PlayerController : MonoBehaviour
         SetScoreText();
         lives = 3;
         SetlivesText();
-        WinText.gameObject.SetActive(false);
     }
 
     void Update()
@@ -57,18 +55,17 @@ public class PlayerController : MonoBehaviour
         string sceneName = currentScene.name;
         if (sceneName == "SimeMan")
         {
-            if (score == 6900)
+            if (score == 6900)  //6900
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
         else if (sceneName == "SimeMan Level 2")
         {
-            if (score == 6700)
+            if (score == 6700) //6700
             {
                 if(gameObject.CompareTag("Player"))
                 {
-                    Destroy(gameObject);
                     SetWinText();
                 }
             }
@@ -98,7 +95,6 @@ public class PlayerController : MonoBehaviour
         {
             if(gameObject.CompareTag("Player"))
             {
-                Destroy(gameObject);
                 SetWinText();
             }
         }
@@ -108,21 +104,11 @@ public class PlayerController : MonoBehaviour
     {
         if(score == 6700)
         {
-            WinText.gameObject.SetActive(true);
-            WinText.text = "You Win: Press SPACE";
-            if(Input.GetKeyDown(KeyCode.Space) == true)
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
-            }
+            SceneManager.LoadScene(3);
         }
         else if( lives <= 0)
         {
-            WinText.gameObject.SetActive(true);
-            WinText.text = "YOU DIED: Press SPACE";
-            if(Input.GetKeyDown(KeyCode.Space) == true)
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
-            }
+            SceneManager.LoadScene(4);
         }
     }
 

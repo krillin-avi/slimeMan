@@ -15,4 +15,14 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void NewGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void BackMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
