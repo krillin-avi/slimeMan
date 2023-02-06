@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rigidbody2d;
+
+    Collider2D collider2d;
     float horizontal;
     float vertical;
 
@@ -22,10 +24,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
+        collider2d = GetComponent<Collider2D>();
         score = 0;
         SetScoreText();
         lives = 3;
         SetlivesText();
+        
     }
 
     void Update()
@@ -37,6 +41,7 @@ public class PlayerController : MonoBehaviour
         {
             Application.Quit();
         }
+
     }
 
     void FixedUpdate()
@@ -55,14 +60,14 @@ public class PlayerController : MonoBehaviour
         string sceneName = currentScene.name;
         if (sceneName == "SimeMan")
         {
-            if (score == 6900)  //6900
+            if (score == 6950)  //6900
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
         else if (sceneName == "SimeMan Level 2")
         {
-            if (score == 6700) //6700
+            if (score == 6750) //6700
             {
                 if(gameObject.CompareTag("Player"))
                 {
@@ -82,10 +87,9 @@ public class PlayerController : MonoBehaviour
         if (collision.collider.tag == "Enemy")
         {
             lives = lives -1;
-            //Destroy(collision.collider.gameObject);
             SetlivesText();
         }
-
+        
     }
     void SetlivesText()
     {
@@ -100,7 +104,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-        void SetWinText()
+    void SetWinText()
     {
         if(score == 6700)
         {
@@ -111,5 +115,5 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(4);
         }
     }
-
+            
 }
